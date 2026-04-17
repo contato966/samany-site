@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAMANY | Agência de Influência</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* CONFIGURAÇÕES GERAIS */
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            font-family:'Poppins',sans-serif;
+            background:#f8f9fa; 
+            color:#1a1a1a;
+            overflow-x: hidden;
+        }
+
+        .container{max-width:1100px;margin:auto;padding:0 24px;}
+
+        /* HEADER */
+        .header{
+            position:fixed;
+            width:100%;
+            top:0;
+            background:rgba(255,255,255,0.7);
+            backdrop-filter:blur(20px);
+            -webkit-backdrop-filter:blur(20px);
+            z-index:999;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:14px 24px;
+        }
+
+        .logo-img{height:28px;}
+
+        /* BOLINHAS DOS ÍCONES */
+        .nav-icons{ display: flex; align-items: center; gap: 8px; }
+        .nav-icons a{
+            background:#1a1a1a;
+            width:36px;
+            height:36px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:50%;
+            transition: 0.3s ease;
+        }
+
+        .nav-icons a:hover{ transform: scale(1.1); background: #000; }
+        .nav-icons svg{ width:18px; height:18px; fill: #fff; }
+
+        /* HERO SECTION */
+        .hero{
+            height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            background:url("assets/images/header.jpg") center/cover no-repeat;
+            position:relative;
+        }
+
+        .hero::after{
+            content:"";
+            position:absolute;
+            inset:0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.9) 100%);
+        }
+
+        .hero-content{ position:relative; z-index:2; max-width:800px; padding: 0 20px; }
+        .hero h1{ 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
+            font-weight: 800; 
+            line-height: 1.1; 
+            margin-bottom: 24px; 
+            letter-spacing: -1px;
+        }
+        .hero p{ font-size: 1.1rem; color: #444; margin-bottom: 32px; }
+
+        .cta{
+            background:#1a1a1a;
+            color:#fff;
+            padding:16px 38px;
+            border-radius:50px;
+            text-decoration:none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.4s;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .cta:hover{ transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+
+        /* SEÇÃO DE SERVIÇOS - GRADE 2x2 */
+        section{padding:100px 0;}
+
+        .services-visual{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            gap:24px;
+        }
+
+        @media (max-width: 768px) {
+            .services-visual { grid-template-columns: 1fr; } 
+        }
+
+        .service-card {
+            position: relative;
+            height: 420px; 
+            border-radius: 32px; 
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .service-card:hover { transform: translateY(-12px); }
+
+        .service-card .bg-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.6); 
+            transition: 0.8s ease;
+        }
+
+        .service-card:hover .bg-image {
+            transform: scale(1.1); 
+            filter: grayscale(100%) brightness(0.8);
+        }
+
+        .service-info {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 28px;
+            color: #fff;
+        }
+
+        .service-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px; 
+        }
+
+        /* SEÇÃO DUAL - CTAs */
+        .dual{ display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:24px; }
+        
+        .dual-card{
+            background: #fff;
+            padding:60px 40px;
+            text-align:center;
+            border-radius:40px;
+            transition: 0.4s;
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 380px;
+        }
+
+        .dual-card:hover{ border-color: #000; transform: translateY(-10px); }
+
+        /* FINAL */
+        .final{
+            background:#1a1a1a;
+            color:#fff;
+            text-align:center;
+            padding:140px 20px;
+            border-radius: 80px 80px 0 0;
+        }
+
+        /* FOOTER CENTRALIZADO */
+        .footer{ 
+            position:relative; 
+            padding: 80px 0;
+            background: #1a1a1a;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo{ 
+            height: 35px; 
+            margin-bottom: 20px; 
+            display: block;
+        }
+
+        .footer-copy{ 
+            font-size:0.85rem; 
+            opacity:0.5; 
+            margin-bottom:25px; 
+            color: #fff;
+        }
+
+        .footer-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .footer-icons a{
+            background: rgba(255,255,255,0.05);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-icons a:hover{ background: #fff; transform: translateY(-5px); }
+        .footer-icons a:hover svg{ fill: #000; }
+        .footer-icons svg{ width:20px; height:20px; fill: #fff; transition: 0.3s; }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="nav container">
+            <img src="assets/images/logo.png" class="logo-img" alt="Logo Samany">
+            <div class="nav-icons">
+                <a href="https://wa.me/553892598442" title="WhatsApp">
+                    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.3.045-.693.076-1.112-.059-.27-.088-.613-.207-1.049-.395-1.851-.801-3.042-2.693-3.134-2.816-.092-.123-.746-.995-.746-1.898 0-.902.473-1.346.643-1.53.17-.184.37-.23.493-.23h.352c.114 0 .264-.043.414.331.155.385.529 1.288.574 1.381.045.092.076.199.015.322-.062.122-.093.199-.185.307-.092.107-.193.242-.277.329-.101.101-.205.212-.087.414.118.202.525.866 1.13 1.403.778.694 1.432.91 1.636 1.012.204.102.325.085.447-.054.122-.139.525-.615.666-.826.142-.212.284-.176.478-.103.193.072 1.229.581 1.444.689.215.107.359.161.411.25.053.089.053.518-.091.923zM12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/></svg>
+                </a>
+                <a href="mailto:contato@samanyagencia.com" title="Email">
+                    <svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/samanydigital/" title="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.919-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.584.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transformamos influência em contratos e posicionamento em faturamento.</h1>
+            <p>Conectamos marcas e influenciadores com estratégia e oportunidades reais.</p>
+            <a href="https://wa.me/553892598442" class="cta">Quero crescer com a SAMANY</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div style="text-align:center; margin-bottom: 60px;">
+                <span style="text-transform: uppercase; letter-spacing: 3px; font-size: 0.7rem; font-weight: 700; color: #888;">Nossa Expertise</span>
+                <h2 style="font-size: 2.8rem; font-weight: 800; margin-top: 10px;">Serviços Exclusivos</h2>
+            </div>
+
+            <div class="services-visual">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070" class="bg-image">
+                    <div class="service-info">
+                        <span class="service-tag">Business</span>
+                        <h3>Assessoria Comercial</h3>
+                        <p>Gestão estratégica de parcerias e prospecção ativa para grandes contratos.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1974" class="bg-image">
+                    <div class="service-info">
+                        <span class="service-tag">Visual</span>
+                        <h3>Portfólio Profissional</h3>
+                        <p>Construção de uma imagem de autoridade que atrai as marcas certas.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1964" class="bg-image">
+                    <div class="service-info">
+                        <span class="service-tag">Growth</span>
+                        <h3>Mídia Kit</h3>
+                        <p>Apresentação comercial de alto impacto com seus dados e métricas reais.</p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071" class="bg-image">
+                    <div class="service-info">
+                        <span class="service-tag">Casting</span>
+                        <h3>Casting para UGC's</h3>
+                        <p>Conectamos criadores de conteúdo técnico com marcas inovadoras.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="dual">
+                <div class="dual-card">
+                    <div>
+                        <h3 style="font-weight: 800; text-transform: uppercase; font-size: 1.8rem; margin-bottom: 20px;">Sou Marca</h3>
+                        <p style="color: #666; margin-bottom: 30px;">Conectamos sua marca aos influenciadores ideais com estratégia de elite.</p>
+                    </div>
+                    <a href="https://tally.so/r/J9DKOR" class="cta">Encontrar Talentos</a>
+                </div>
+
+                <div class="dual-card">
+                    <div>
+                        <h3 style="font-weight: 800; text-transform: uppercase; font-size: 1.8rem; margin-bottom: 20px;">Sou Influenciador</h3>
+                        <p style="color: #666; margin-bottom: 30px;">Elevamos sua autoridade digital para atrair contratos sólidos e premium.</p>
+                    </div>
+                    <a href="https://tally.so/r/5BvKQN" class="cta">Fazer parte do casting</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final">
+        <h2>Seu posicionamento define seu faturamento.</h2>
+        <p>O próximo nível da sua marca ou carreira começa com uma estratégia profissional de impacto.</p>
+        <a href="https://wa.me/553892598442" class="cta">Falar com um especialista</a>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content container">
+            <img src="assets/images/logo.png" class="footer-logo">
+            <div class="footer-copy">SAMANY © Todos os direitos reservados</div>
+            <div class="footer-icons">
+                <a href="https://www.instagram.com/samanydigital/" title="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.919-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.584.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="mailto:contato@samanyagencia.com" title="Email">
+                    <svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                </a>
+                <a href="https://wa.me/553892598442" title="WhatsApp">
+                    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.3.045-.693.076-1.112-.059-.27-.088-.613-.207-1.049-.395-1.851-.801-3.042-2.693-3.134-2.816-.092-.123-.746-.995-.746-1.898 0-.902.473-1.346.643-1.53.17-.184.37-.23.493-.23h.352c.114 0 .264-.043.414.331.155.385.529 1.288.574 1.381.045.092.076.199.015.322-.062.122-.093.199-.185.307-.092.107-.193.242-.277.329-.101.101-.205.212-.087.414.118.202.525.866 1.13 1.403.778.694 1.432.91 1.636 1.012.204.102.325.085.447-.054.122-.139.525-.615.666-.826.142-.212.284-.176.478-.103.193.072 1.229.581 1.444.689.215.107.359.161.411.25.053.089.053.518-.091.923zM12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
